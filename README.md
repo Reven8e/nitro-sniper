@@ -37,7 +37,7 @@
 - sudo apt-get install tesseract-ocr
 - python/3 app.py
 
-### - Macos (works on m1 too)
+#### - Macos (works on m1 too)
 - pip/3 install -r requirements.txt
 - brew install imagemagick
 - brew install tesseract
