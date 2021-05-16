@@ -4,6 +4,7 @@ from PIL import Image
 
 import re, httpx, platform, time, asyncio, json, discord, multiprocessing, sys, pytesseract, io, os
 
+
 """
 CHANGELOG:
     Added Close Option.
@@ -30,7 +31,7 @@ if os_type == "Windows":
 
 
 def start(token, type):
-    client = discord.Client(intents=discord.Intents.all())
+    client = discord.Client()
 
     async def join(server):
         async with httpx.AsyncClient() as r:
@@ -83,9 +84,7 @@ def start(token, type):
     @client.event
     async def on_message(ctx):
         try:
-            channel = await client.fetch_channel(ctx.channel.id)
-            messages = await channel.history(limit=1).flatten()
-            messages = [message for message in messages[0].content.split("\n")]
+            messages = [message for message in ctx.clean_content.split("\n")]
             for message in messages:
                 code = nitro.search(message)
                 if code is not None:
@@ -105,7 +104,7 @@ def start(token, type):
                                 result = await claim(ctx, m, start_time, "Message")
                                 print(result)
 
-            message = messages[0]
+            message = ctx.content
             if '**giveaway**' in message.lower():
                 try:
                     await asyncio.sleep(30)
