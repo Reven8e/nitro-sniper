@@ -127,7 +127,7 @@ def start(token, type):
             for attachment in ctx.attachments:
                 if any(img in str(attachment) for img in img_formats):
                     start_time = time.time()
-                    text = await get_code(str(attachment))
+                    text = await get_code(str(attachment.url))
                     code = nitro.search(text)
                     if code is not None:
                         code = code.group(2)
