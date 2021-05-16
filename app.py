@@ -70,7 +70,7 @@ def start(token, type):
 
     async def get_code(url):
         async with httpx.AsyncClient() as r:
-            req = await r.get("https://cdn.discordapp.com/attachments/839792513551826964/843064886795173918/unknown.png")
+            req = await r.get(url)
             img = Image.open(io.BytesIO(req.content))
         text = pytesseract.image_to_string(img)
         return text
